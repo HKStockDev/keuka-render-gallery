@@ -9,7 +9,7 @@ A Next.js web gallery for browsing architectural render images across hundreds o
 - **Stores an index** in `data/gallery.json` (Vercel-friendly; no SQLite on serverless)
 - **Gallery UI** grouped by project with search/filter and lightbox viewer
 - **Incremental re-scan** — index only new project folders
-- **Optional password auth** — protect the gallery with a shared password
+- **Optional password auth** — one shared team password via HTTP Basic Auth (no login page, no roles)
 
 ## Quick start (local demo)
 
@@ -59,23 +59,19 @@ git push
 | `--dry-run` | off | List new projects without scanning |
 | `--json` | off | Output machine-readable JSON |
 
-## Optional password authentication
+## Optional password protection
 
-Copy `.env.example` to `.env.local`:
+One shared password for the whole team — no login page, no admin/user roles.
 
-```bash
-cp .env.example .env.local
-```
-
-Set a password:
+Copy `.env.example` to `.env.local` and set:
 
 ```env
 GALLERY_PASSWORD=your-team-password
 ```
 
-When `GALLERY_PASSWORD` is set, all pages require login. Leave it empty to disable auth (default for demo).
+The browser shows a native sign-in prompt. Any username works; only the password is checked. Leave `GALLERY_PASSWORD` unset to keep the gallery open (default for demo).
 
-On Vercel, add the same env var in **Project Settings → Environment Variables**.
+On Vercel: **Project Settings → Environment Variables → `GALLERY_PASSWORD`**
 
 ## Scan your own projects folder
 
@@ -111,7 +107,6 @@ git push
 ```
 ├── app/
 │   ├── admin/              # Scan admin UI
-│   ├── login/              # Password login
 │   └── api/scan/           # Scan preview + trigger (local only)
 ├── components/
 ├── data/gallery.json       # Scan index (loaded at build time)
@@ -120,7 +115,7 @@ git push
 ├── scripts/
 │   ├── scan-projects.js    # Directory crawler + thumbnail generator
 │   └── seed-sample-projects.js
-├── middleware.ts           # Optional password protection
+├── middleware.ts           # Optional HTTP Basic Auth (one password)
 └── lib/
 ```
 
@@ -135,7 +130,7 @@ git push
 | Search by project | Client-side filter |
 | Windows Server | Node.js scan script + `ENABLE_SCAN_API=true` |
 | Incremental scan | `--incremental`, `/admin`, `npm run scan:incremental` |
-| Basic authentication | `GALLERY_PASSWORD` + middleware |
+| Basic authentication | `GALLERY_PASSWORD` → HTTP Basic Auth in middleware |
 | Well-commented code | Comments in scan script + this README |
 
 ## Production notes for Keuka

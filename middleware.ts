@@ -1,50 +1,50 @@
 import { NextRequest, NextResponse } from "next/server";
-import {
-  SESSION_COOKIE,
-  getAuthSecret,
-  isAuthEnabled,
-  verifySessionToken,
-} from "@/lib/auth";
 
-const PUBLIC_PATHS = ["/login", "/api/auth/login", "/api/auth/status"];
-
-function isPublicPath(pathname: string): boolean {
-  if (PUBLIC_PATHS.includes(pathname)) return true;
-  if (pathname.startsWith("/_next")) return true;
-  if (pathname.startsWith("/favicon")) return true;
-  if (/\.(jpg|jpeg|png|webp|svg|ico|css|js|woff2?)$/i.test(pathname)) {
-    return true;
-  }
-  return false;
+/**
+ * Optional single-password protection via HTTP Basic Auth.
+ * Set GALLERY_PASSWORD in env — no login page, no roles, no sessions.
+ * Leave unset to keep the gallery open (e.g. local demo).
+ */
+function getPassword(): string | undefined {
+  const value = process.env.GALLERY_PASSWORD?.trim();
+  return value || undefined;
 }
 
-export async function middleware(request: NextRequest) {
-  if (!isAuthEnabled()) {
+function isAuthorized(request: NextRequest, password: string): boolean {
+  const header = request.headers.get("authorization");
+  if (!header?.startsWith("Basic ")) return false;
+
+  try {
+    const decoded = atob(header.slice(6));
+    const separator = decoded.indexOf(":");
+    if (separator === -1) return false;
+    // Username is ignored — one shared team password
+    return decoded.slice(separator + 1) === password;
+  } catch {
+    return false;
+  }
+}
+
+function unauthorized(): NextResponse {
+  return new NextResponse("Authentication required", {
+    status: 401,
+    headers: {
+      "WWW-Authenticate": 'Basic realm="Keuka Studios Gallery", charset="UTF-8"',
+    },
+  });
+}
+
+export function middleware(request: NextRequest) {
+  const password = getPassword();
+  if (!password) return NextResponse.next();
+
+  if (isAuthorized(request, password)) {
     return NextResponse.next();
   }
 
-  const { pathname } = request.nextUrl;
-  if (isPublicPath(pathname)) {
-    return NextResponse.next();
-  }
-
-  const secret = getAuthSecret();
-  const token = request.cookies.get(SESSION_COOKIE)?.value;
-  const valid = await verifySessionToken(token, secret);
-
-  if (valid) {
-    return NextResponse.next();
-  }
-
-  if (pathname.startsWith("/api/")) {
-    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  }
-
-  const loginUrl = new URL("/login", request.url);
-  loginUrl.searchParams.set("from", pathname);
-  return NextResponse.redirect(loginUrl);
+  return unauthorized();
 }
 
 export const config = {
-  matcher: ["/((?!_next/static|_next/image).*)"],
+  matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
 };

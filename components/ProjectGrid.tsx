@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import type { Project } from "@/lib/types";
 import ProjectCard from "./ProjectCard";
 
@@ -15,15 +14,15 @@ export default function ProjectGrid({
 }: ProjectGridProps) {
   if (projects.length === 0) {
     return (
-      <div className="text-center py-16 text-keuka-slate">
-        <p className="text-lg">No projects match your search.</p>
-        <p className="text-sm mt-2">Try a different project name or clear the filter.</p>
+      <div className="text-center py-24 text-[var(--muted)]">
+        <p className="text-lg text-[var(--foreground)]">No projects found</p>
+        <p className="text-sm mt-2">Try a different search term</p>
       </div>
     );
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4">
       {projects.map((project) => (
         <ProjectCard
           key={project.id}

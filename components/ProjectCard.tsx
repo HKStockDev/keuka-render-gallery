@@ -13,32 +13,33 @@ export default function ProjectCard({ project, onClick }: ProjectCardProps) {
     <button
       type="button"
       onClick={onClick}
-      className="group text-left w-full rounded-xl overflow-hidden bg-[var(--card)] border border-[var(--border)] hover:border-keuka-accent/40 hover:shadow-lg hover:shadow-keuka-accent/5 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-keuka-accent/50"
+      className="group relative w-full overflow-hidden rounded-lg bg-[var(--card)] focus:outline-none focus-visible:ring-2 focus-visible:ring-keuka-accent/60"
     >
-      <div className="relative aspect-[4/3] bg-keuka-steel/30 overflow-hidden">
+      <div className="relative aspect-[4/5] sm:aspect-[3/4] overflow-hidden">
         {project.coverThumbnail ? (
           <Image
             src={project.coverThumbnail}
             alt={project.name}
             fill
-            className="object-cover group-hover:scale-105 transition-transform duration-300"
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+            sizes="(max-width: 640px) 50vw, (max-width: 1280px) 33vw, 25vw"
           />
         ) : (
-          <div className="absolute inset-0 flex items-center justify-center text-keuka-slate">
+          <div className="absolute inset-0 flex items-center justify-center bg-[var(--card)] text-[var(--muted)] text-sm">
             No renders
           </div>
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-        <span className="absolute bottom-3 right-3 px-2 py-1 rounded-md bg-black/60 text-xs text-white backdrop-blur-sm">
-          {project.imageCount} {project.imageCount === 1 ? "render" : "renders"}
-        </span>
-      </div>
-      <div className="p-4">
-        <h3 className="font-display text-lg font-medium text-[var(--foreground)] group-hover:text-keuka-accent transition-colors line-clamp-2">
-          {project.name}
-        </h3>
-        <p className="mt-1 text-xs text-keuka-slate truncate">{project.folderPath}</p>
+
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
+
+        <div className="absolute inset-x-0 bottom-0 p-3 sm:p-4 text-left">
+          <h3 className="font-display text-base sm:text-lg font-medium leading-snug line-clamp-2 group-hover:text-keuka-accent transition-colors">
+            {project.name}
+          </h3>
+          <p className="mt-1 text-xs text-white/60">
+            {project.imageCount} {project.imageCount === 1 ? "photo" : "photos"}
+          </p>
+        </div>
       </div>
     </button>
   );

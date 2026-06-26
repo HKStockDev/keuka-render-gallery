@@ -42,17 +42,16 @@ export default function ImageLightbox({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex flex-col bg-black/95 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex flex-col bg-black"
       role="dialog"
       aria-modal="true"
       aria-label={`${project.name} — ${image.filename}`}
     >
-      {/* Header */}
-      <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 shrink-0">
+      <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 shrink-0 bg-black/80 backdrop-blur-sm">
         <div className="min-w-0">
-          <h2 className="font-display text-lg truncate">{project.name}</h2>
-          <p className="text-sm text-keuka-slate truncate">
-            {image.filename} · {imageIndex + 1} of {project.images.length}
+          <p className="text-sm text-white/50 truncate">{project.name}</p>
+          <p className="text-sm truncate">
+            {image.filename} · {imageIndex + 1} / {project.images.length}
           </p>
         </div>
         <button
@@ -62,27 +61,26 @@ export default function ImageLightbox({
           aria-label="Close"
         >
           <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
       </div>
 
-      {/* Main image */}
-      <div className="flex-1 relative flex items-center justify-center p-4 min-h-0">
+      <div className="flex-1 relative flex items-center justify-center p-2 sm:p-6 min-h-0">
         {imageIndex > 0 && (
           <button
             type="button"
             onClick={() => onNavigate(imageIndex - 1)}
-            className="absolute left-2 md:left-4 z-10 p-3 rounded-full bg-black/50 hover:bg-black/70 transition"
+            className="absolute left-2 sm:left-4 z-10 p-3 rounded-full bg-black/60 hover:bg-black/80 border border-white/10 transition"
             aria-label="Previous image"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M15 19l-7-7 7-7" />
             </svg>
           </button>
         )}
 
-        <div className="relative w-full h-full max-w-6xl">
+        <div className="relative w-full h-full max-w-[1400px]">
           <Image
             src={image.fullUrl}
             alt={image.filename}
@@ -97,26 +95,27 @@ export default function ImageLightbox({
           <button
             type="button"
             onClick={() => onNavigate(imageIndex + 1)}
-            className="absolute right-2 md:right-4 z-10 p-3 rounded-full bg-black/50 hover:bg-black/70 transition"
+            className="absolute right-2 sm:right-4 z-10 p-3 rounded-full bg-black/60 hover:bg-black/80 border border-white/10 transition"
             aria-label="Next image"
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.75} d="M9 5l7 7-7 7" />
             </svg>
           </button>
         )}
       </div>
 
-      {/* Thumbnail strip */}
-      <div className="shrink-0 border-t border-white/10 p-3 overflow-x-auto gallery-scroll">
-        <div className="flex gap-2 justify-center min-w-min">
+      <div className="shrink-0 border-t border-white/10 p-3 overflow-x-auto gallery-scroll bg-black/80">
+        <div className="flex gap-2 justify-center min-w-min px-2">
           {project.images.map((img, i) => (
             <button
               key={img.id}
               type="button"
               onClick={() => onNavigate(i)}
-              className={`relative w-16 h-16 rounded-md overflow-hidden shrink-0 border-2 transition ${
-                i === imageIndex ? "border-keuka-accent" : "border-transparent opacity-60 hover:opacity-100"
+              className={`relative w-14 h-14 sm:w-16 sm:h-16 rounded-md overflow-hidden shrink-0 border-2 transition ${
+                i === imageIndex
+                  ? "border-keuka-accent opacity-100"
+                  : "border-transparent opacity-50 hover:opacity-80"
               }`}
             >
               <Image src={img.thumbnailUrl} alt="" fill className="object-cover" sizes="64px" />

@@ -3,12 +3,12 @@
 @tailwind utilities;
 
 :root {
-  --background: #0f1419;
-  --foreground: #f1f5f9;
-  --card: #1a2332;
-  --border: #2d3a4d;
+  --background: #080a0c;
+  --foreground: #eef2f6;
+  --card: #111418;
+  --border: #222830;
   --accent: #c9a962;
-  --muted: #94a3b8;
+  --muted: #6b7280;
 }
 
 body {
@@ -23,14 +23,51 @@ body {
   }
 }
 
-/* Custom scrollbar for gallery */
+/* Pinterest-style masonry for render thumbnails */
+.masonry-grid {
+  column-count: 2;
+  column-gap: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .masonry-grid {
+    column-count: 3;
+    column-gap: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .masonry-grid {
+    column-count: 4;
+  }
+}
+
+@media (min-width: 1280px) {
+  .masonry-grid {
+    column-count: 5;
+  }
+}
+
+.masonry-item {
+  break-inside: avoid;
+  margin-bottom: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .masonry-item {
+    margin-bottom: 1rem;
+  }
+}
+
 .gallery-scroll::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
+
 .gallery-scroll::-webkit-scrollbar-track {
   background: var(--card);
 }
+
 .gallery-scroll::-webkit-scrollbar-thumb {
   background: var(--border);
   border-radius: 4px;
