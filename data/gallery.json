@@ -1,0 +1,229 @@
+{
+  "version": 1,
+  "projectsRoot": "sample-projects",
+  "lastFullScan": "2026-06-26T21:09:31.465Z",
+  "projectCount": 6,
+  "imageCount": 16,
+  "projects": [
+    {
+      "id": "2022-custom-spiral-stair",
+      "name": "2022-Custom-Spiral-Stair",
+      "folderPath": "sample-projects/2022-Custom-Spiral-Stair",
+      "coverThumbnail": "/thumbnails/2022-custom-spiral-stair/5279f831a438.jpg",
+      "imageCount": 2,
+      "images": [
+        {
+          "id": "2022-custom-spiral-stair-5279f831a438",
+          "filename": "spiral-hero.jpg",
+          "sourcePath": "2022-Custom-Spiral-Stair/renderings/spiral-hero.jpg",
+          "thumbnailUrl": "/thumbnails/2022-custom-spiral-stair/5279f831a438.jpg",
+          "fullUrl": "/thumbnails/2022-custom-spiral-stair/5279f831a438-full.jpg",
+          "width": 400,
+          "height": 250,
+          "scannedAt": "2026-06-26T21:09:30.652Z"
+        },
+        {
+          "id": "2022-custom-spiral-stair-5f2ee088fd15",
+          "filename": "tread-pattern.png",
+          "sourcePath": "2022-Custom-Spiral-Stair/renderings/tread-pattern.png",
+          "thumbnailUrl": "/thumbnails/2022-custom-spiral-stair/5f2ee088fd15.jpg",
+          "fullUrl": "/thumbnails/2022-custom-spiral-stair/5f2ee088fd15-full.png",
+          "width": 400,
+          "height": 250,
+          "scannedAt": "2026-06-26T21:09:30.652Z"
+        }
+      ],
+      "lastScanned": "2026-06-26T21:09:30.652Z"
+    },
+    {
+      "id": "2023-lake-house-balcony",
+      "name": "2023-Lake-House-Balcony",
+      "folderPath": "sample-projects/2023-Lake-House-Balcony",
+      "coverThumbnail": "/thumbnails/2023-lake-house-balcony/d0434e3c49be.jpg",
+      "imageCount": 2,
+      "images": [
+        {
+          "id": "2023-lake-house-balcony-d0434e3c49be",
+          "filename": "balcony-overview.jpg",
+          "sourcePath": "2023-Lake-House-Balcony/images/balcony-overview.jpg",
+          "thumbnailUrl": "/thumbnails/2023-lake-house-balcony/d0434e3c49be.jpg",
+          "fullUrl": "/thumbnails/2023-lake-house-balcony/d0434e3c49be-full.jpg",
+          "width": 400,
+          "height": 250,
+          "scannedAt": "2026-06-26T21:09:30.777Z"
+        },
+        {
+          "id": "2023-lake-house-balcony-70656fe863ed",
+          "filename": "glass-panel.png",
+          "sourcePath": "2023-Lake-House-Balcony/images/glass-panel.png",
+          "thumbnailUrl": "/thumbnails/2023-lake-house-balcony/70656fe863ed.jpg",
+          "fullUrl": "/thumbnails/2023-lake-house-balcony/70656fe863ed-full.png",
+          "width": 400,
+          "height": 250,
+          "scannedAt": "2026-06-26T21:09:30.777Z"
+        }
+      ],
+      "lastScanned": "2026-06-26T21:09:30.777Z"
+    },
+    {
+      "id": "2023-wine-cellar-gate",
+      "name": "2023-Wine-Cellar-Gate",
+      "folderPath": "sample-projects/2023-Wine-Cellar-Gate",
+      "coverThumbnail": "/thumbnails/2023-wine-cellar-gate/dc29bb86c857.jpg",
+      "imageCount": 1,
+      "images": [
+        {
+          "id": "2023-wine-cellar-gate-dc29bb86c857",
+          "filename": "gate-front.jpg",
+          "sourcePath": "2023-Wine-Cellar-Gate/images/gate-front.jpg",
+          "thumbnailUrl": "/thumbnails/2023-wine-cellar-gate/dc29bb86c857.jpg",
+          "fullUrl": "/thumbnails/2023-wine-cellar-gate/dc29bb86c857-full.jpg",
+          "width": 400,
+          "height": 250,
+          "scannedAt": "2026-06-26T21:09:30.880Z"
+        }
+      ],
+      "lastScanned": "2026-06-26T21:09:30.880Z"
+    },
+    {
+      "id": "2024-commercial-atrium",
+      "name": "2024-Commercial-Atrium",
+      "folderPath": "sample-projects/2024-Commercial-Atrium",
+      "coverThumbnail": "/thumbnails/2024-commercial-atrium/33198e9ec9c5.jpg",
+      "imageCount": 4,
+      "images": [
+        {
+          "id": "2024-commercial-atrium-33198e9ec9c5",
+          "filename": "atrium-rail-section.png",
+          "sourcePath": "2024-Commercial-Atrium/renders/atrium-rail-section.png",
+          "thumbnailUrl": "/thumbnails/2024-commercial-atrium/33198e9ec9c5.jpg",
+          "fullUrl": "/thumbnails/2024-commercial-atrium/33198e9ec9c5-full.png",
+          "width": 400,
+          "height": 250,
+          "scannedAt": "2026-06-26T21:09:30.917Z"
+        },
+        {
+          "id": "2024-commercial-atrium-a752dc5b7221",
+          "filename": "atrium-wide.jpg",
+          "sourcePath": "2024-Commercial-Atrium/renders/atrium-wide.jpg",
+          "thumbnailUrl": "/thumbnails/2024-commercial-atrium/a752dc5b7221.jpg",
+          "fullUrl": "/thumbnails/2024-commercial-atrium/a752dc5b7221-full.jpg",
+          "width": 400,
+          "height": 250,
+          "scannedAt": "2026-06-26T21:09:30.917Z"
+        },
+        {
+          "id": "2024-commercial-atrium-7d90984b6f28",
+          "filename": "client-option-a.jpg",
+          "sourcePath": "2024-Commercial-Atrium/visualize/client-option-a.jpg",
+          "thumbnailUrl": "/thumbnails/2024-commercial-atrium/7d90984b6f28.jpg",
+          "fullUrl": "/thumbnails/2024-commercial-atrium/7d90984b6f28-full.jpg",
+          "width": 400,
+          "height": 250,
+          "scannedAt": "2026-06-26T21:09:30.917Z"
+        },
+        {
+          "id": "2024-commercial-atrium-e608fa29ce3a",
+          "filename": "client-option-b.jpg",
+          "sourcePath": "2024-Commercial-Atrium/visualize/client-option-b.jpg",
+          "thumbnailUrl": "/thumbnails/2024-commercial-atrium/e608fa29ce3a.jpg",
+          "fullUrl": "/thumbnails/2024-commercial-atrium/e608fa29ce3a-full.jpg",
+          "width": 400,
+          "height": 250,
+          "scannedAt": "2026-06-26T21:09:30.917Z"
+        }
+      ],
+      "lastScanned": "2026-06-26T21:09:30.917Z"
+    },
+    {
+      "id": "2024-downtown-loft-rail",
+      "name": "2024-Downtown-Loft-Rail",
+      "folderPath": "sample-projects/2024-Downtown-Loft-Rail",
+      "coverThumbnail": "/thumbnails/2024-downtown-loft-rail/bf4f57a41aa8.jpg",
+      "imageCount": 4,
+      "images": [
+        {
+          "id": "2024-downtown-loft-rail-bf4f57a41aa8",
+          "filename": "final-comp.jpg",
+          "sourcePath": "2024-Downtown-Loft-Rail/keyshot/final-comp.jpg",
+          "thumbnailUrl": "/thumbnails/2024-downtown-loft-rail/bf4f57a41aa8.jpg",
+          "fullUrl": "/thumbnails/2024-downtown-loft-rail/bf4f57a41aa8-full.jpg",
+          "width": 400,
+          "height": 250,
+          "scannedAt": "2026-06-26T21:09:31.106Z"
+        },
+        {
+          "id": "2024-downtown-loft-rail-6eba56be59ea",
+          "filename": "landing-view.jpg",
+          "sourcePath": "2024-Downtown-Loft-Rail/renders/landing-view.jpg",
+          "thumbnailUrl": "/thumbnails/2024-downtown-loft-rail/6eba56be59ea.jpg",
+          "fullUrl": "/thumbnails/2024-downtown-loft-rail/6eba56be59ea-full.jpg",
+          "width": 400,
+          "height": 250,
+          "scannedAt": "2026-06-26T21:09:31.106Z"
+        },
+        {
+          "id": "2024-downtown-loft-rail-3ed5daf883d8",
+          "filename": "loft-rail-main.jpg",
+          "sourcePath": "2024-Downtown-Loft-Rail/renders/loft-rail-main.jpg",
+          "thumbnailUrl": "/thumbnails/2024-downtown-loft-rail/3ed5daf883d8.jpg",
+          "fullUrl": "/thumbnails/2024-downtown-loft-rail/3ed5daf883d8-full.jpg",
+          "width": 400,
+          "height": 250,
+          "scannedAt": "2026-06-26T21:09:31.106Z"
+        },
+        {
+          "id": "2024-downtown-loft-rail-0a3ad6e93664",
+          "filename": "stringer-closeup.png",
+          "sourcePath": "2024-Downtown-Loft-Rail/renders/stringer-closeup.png",
+          "thumbnailUrl": "/thumbnails/2024-downtown-loft-rail/0a3ad6e93664.jpg",
+          "fullUrl": "/thumbnails/2024-downtown-loft-rail/0a3ad6e93664-full.png",
+          "width": 400,
+          "height": 250,
+          "scannedAt": "2026-06-26T21:09:31.106Z"
+        }
+      ],
+      "lastScanned": "2026-06-26T21:09:31.106Z"
+    },
+    {
+      "id": "2024-river-oaks-stair",
+      "name": "2024-River-Oaks-Stair",
+      "folderPath": "sample-projects/2024-River-Oaks-Stair",
+      "coverThumbnail": "/thumbnails/2024-river-oaks-stair/d90e261b3657.jpg",
+      "imageCount": 3,
+      "images": [
+        {
+          "id": "2024-river-oaks-stair-d90e261b3657",
+          "filename": "night-view.jpg",
+          "sourcePath": "2024-River-Oaks-Stair/renderings/night-view.jpg",
+          "thumbnailUrl": "/thumbnails/2024-river-oaks-stair/d90e261b3657.jpg",
+          "fullUrl": "/thumbnails/2024-river-oaks-stair/d90e261b3657-full.jpg",
+          "width": 400,
+          "height": 250,
+          "scannedAt": "2026-06-26T21:09:31.302Z"
+        },
+        {
+          "id": "2024-river-oaks-stair-a19dc4ae5112",
+          "filename": "hero-stair-v3.jpg",
+          "sourcePath": "2024-River-Oaks-Stair/renders/hero-stair-v3.jpg",
+          "thumbnailUrl": "/thumbnails/2024-river-oaks-stair/a19dc4ae5112.jpg",
+          "fullUrl": "/thumbnails/2024-river-oaks-stair/a19dc4ae5112-full.jpg",
+          "width": 400,
+          "height": 250,
+          "scannedAt": "2026-06-26T21:09:31.302Z"
+        },
+        {
+          "id": "2024-river-oaks-stair-28d22cf328eb",
+          "filename": "railing-detail.png",
+          "sourcePath": "2024-River-Oaks-Stair/renders/railing-detail.png",
+          "thumbnailUrl": "/thumbnails/2024-river-oaks-stair/28d22cf328eb.jpg",
+          "fullUrl": "/thumbnails/2024-river-oaks-stair/28d22cf328eb-full.png",
+          "width": 400,
+          "height": 250,
+          "scannedAt": "2026-06-26T21:09:31.302Z"
+        }
+      ],
+      "lastScanned": "2026-06-26T21:09:31.302Z"
+    }
+  ]
+}
