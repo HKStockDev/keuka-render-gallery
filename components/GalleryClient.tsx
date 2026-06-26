@@ -116,7 +116,7 @@ export default function GalleryClient({ projects, stats }: GalleryClientProps) {
         <div className="max-w-[1600px] mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[var(--muted)]">
           <p>Keuka Studios · Custom Architectural Metal Fabrication</p>
           <Link href="/admin" className="hover:text-keuka-accent transition">
-            Scan admin
+            Scan tools
           </Link>
         </div>
       </footer>

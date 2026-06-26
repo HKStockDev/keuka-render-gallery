@@ -84,7 +84,7 @@ export default function AdminPanel() {
       <header className="border-b border-[var(--border)] bg-[var(--card)]/50 backdrop-blur-md">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between gap-4">
           <div>
-            <h1 className="font-display text-2xl font-semibold">Scan Admin</h1>
+            <h1 className="font-display text-2xl font-semibold">Scan Tools</h1>
             <p className="text-sm text-keuka-slate mt-0.5">
               Re-scan projects and manage the gallery index
             </p>

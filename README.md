@@ -9,7 +9,6 @@ A Next.js web gallery for browsing architectural render images across hundreds o
 - **Stores an index** in `data/gallery.json` (Vercel-friendly; no SQLite on serverless)
 - **Gallery UI** grouped by project with search/filter and lightbox viewer
 - **Incremental re-scan** — index only new project folders
-- **Optional password auth** — one shared team password via HTTP Basic Auth (no login page, no roles)
 
 ## Quick start (local demo)
 
@@ -38,7 +37,7 @@ npm run scan:preview
 npm run scan:incremental
 ```
 
-Or use the **Admin page** at [/admin](http://localhost:3000/admin) when running locally — it shows new vs indexed projects and can trigger scans from the browser.
+Or use the **scan page** at [/admin](http://localhost:3000/admin) when running locally — it shows new vs indexed projects and can trigger scans from the browser. No login required; all users have the same access.
 
 After scanning, restart the dev server (or commit + redeploy on Vercel):
 
@@ -59,20 +58,6 @@ git push
 | `--dry-run` | off | List new projects without scanning |
 | `--json` | off | Output machine-readable JSON |
 
-## Optional password protection
-
-One shared password for the whole team — no login page, no admin/user roles.
-
-Copy `.env.example` to `.env.local` and set:
-
-```env
-GALLERY_PASSWORD=your-team-password
-```
-
-The browser shows a native sign-in prompt. Any username works; only the password is checked. Leave `GALLERY_PASSWORD` unset to keep the gallery open (default for demo).
-
-On Vercel: **Project Settings → Environment Variables → `GALLERY_PASSWORD`**
-
 ## Scan your own projects folder
 
 ```bash
@@ -91,7 +76,6 @@ After scanning, commit `data/gallery.json` and `public/thumbnails/` (or run scan
 2. Import the project in [vercel.com](https://vercel.com)
 3. Default settings work (`npm run build`)
 4. Ensure `data/gallery.json` and thumbnails are committed before deploy
-5. Optionally set `GALLERY_PASSWORD` in Vercel env vars
 
 ```bash
 npm run seed    # or scan your real folder locally first
@@ -106,7 +90,7 @@ git push
 
 ```
 ├── app/
-│   ├── admin/              # Scan admin UI
+│   ├── admin/              # Scan tools UI (open to all users)
 │   └── api/scan/           # Scan preview + trigger (local only)
 ├── components/
 ├── data/gallery.json       # Scan index (loaded at build time)
@@ -115,7 +99,6 @@ git push
 ├── scripts/
 │   ├── scan-projects.js    # Directory crawler + thumbnail generator
 │   └── seed-sample-projects.js
-├── middleware.ts           # Optional HTTP Basic Auth (one password)
 └── lib/
 ```
 
@@ -130,7 +113,6 @@ git push
 | Search by project | Client-side filter |
 | Windows Server | Node.js scan script + `ENABLE_SCAN_API=true` |
 | Incremental scan | `--incremental`, `/admin`, `npm run scan:incremental` |
-| Basic authentication | `GALLERY_PASSWORD` → HTTP Basic Auth in middleware |
 | Well-commented code | Comments in scan script + this README |
 
 ## Production notes for Keuka
@@ -139,7 +121,6 @@ For the full internal deployment on Windows Server with live network paths:
 
 - Run `scan-projects.js` on a schedule (Task Scheduler) with `--incremental`
 - Set `ENABLE_SCAN_API=true` to allow scans from `/admin` on the local server
-- Set `GALLERY_PASSWORD` for team-only access
 - Or deploy the viewer to Vercel and run scans locally before each push
 
 ---
