@@ -26,7 +26,21 @@ export interface GalleryDatabase {
   version: number;
   projectsRoot: string;
   lastFullScan: string;
+  /** Set when an incremental scan completes */
+  lastIncrementalScan?: string;
   projectCount: number;
   imageCount: number;
   projects: Project[];
+}
+
+export interface ScanResult {
+  mode: "full" | "incremental" | "dry-run";
+  projectsRoot: string;
+  scannedProjects: number;
+  skippedProjects: number;
+  newProjects: string[];
+  totalProjects: number;
+  totalImages: number;
+  lastFullScan: string;
+  lastIncrementalScan?: string;
 }

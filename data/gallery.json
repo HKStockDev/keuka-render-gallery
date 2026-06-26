@@ -2,8 +2,9 @@
   "version": 1,
   "projectsRoot": "sample-projects",
   "lastFullScan": "2026-06-26T21:09:31.465Z",
-  "projectCount": 6,
-  "imageCount": 16,
+  "lastIncrementalScan": "2026-06-26T21:26:58.880Z",
+  "projectCount": 7,
+  "imageCount": 17,
   "projects": [
     {
       "id": "2022-custom-spiral-stair",
@@ -224,6 +225,26 @@
         }
       ],
       "lastScanned": "2026-06-26T21:09:31.302Z"
+    },
+    {
+      "id": "2025-pending-demo-stair",
+      "name": "2025-Pending-Demo-Stair",
+      "folderPath": "sample-projects/2025-Pending-Demo-Stair",
+      "coverThumbnail": "/thumbnails/2025-pending-demo-stair/7e8875e9fab9.jpg",
+      "imageCount": 1,
+      "images": [
+        {
+          "id": "2025-pending-demo-stair-7e8875e9fab9",
+          "filename": "pending-hero.jpg",
+          "sourcePath": "2025-Pending-Demo-Stair/renders/pending-hero.jpg",
+          "thumbnailUrl": "/thumbnails/2025-pending-demo-stair/7e8875e9fab9.jpg",
+          "fullUrl": "/thumbnails/2025-pending-demo-stair/7e8875e9fab9-full.jpg",
+          "width": 400,
+          "height": 250,
+          "scannedAt": "2026-06-26T21:26:58.882Z"
+        }
+      ],
+      "lastScanned": "2026-06-26T21:26:58.882Z"
     }
   ]
 }

@@ -8,7 +8,11 @@
     "start": "next start",
     "lint": "next lint",
     "scan": "node scripts/scan-projects.js",
-    "seed": "node scripts/seed-sample-projects.js && npm run scan"
+    "scan:incremental": "node scripts/scan-projects.js --incremental",
+    "scan:preview": "node scripts/scan-projects.js --incremental --dry-run",
+    "scan:full": "node scripts/scan-projects.js",
+    "seed": "node scripts/seed-sample-projects.js && npm run scan",
+    "demo:pending": "node scripts/add-pending-project.js"
   },
   "dependencies": {
     "next": "^15.1.0",

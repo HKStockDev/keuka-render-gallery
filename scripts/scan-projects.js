@@ -15,6 +15,8 @@
  *   --output PATH     JSON output (default: ./data/gallery.json)
  *   --thumb-dir PATH  Thumbnail output (default: ./public/thumbnails)
  *   --incremental     Only scan project folders not yet in the index
+ *   --dry-run         List new projects without scanning or writing files
+ *   --json            Print machine-readable result JSON to stdout
  *   --thumb-size N    Max thumbnail dimension in px (default: 400)
  */
 
@@ -45,6 +47,8 @@ const DEFAULTS = {
   thumbDir: path.join(process.cwd(), "public", "thumbnails"),
   thumbSize: 400,
   incremental: false,
+  dryRun: false,
+  json: false,
 };
 
 function parseArgs() {
@@ -60,6 +64,8 @@ function parseArgs() {
     else if (arg === "--thumb-size" && args[i + 1])
       opts.thumbSize = parseInt(args[++i], 10);
     else if (arg === "--incremental") opts.incremental = true;
+    else if (arg === "--dry-run") opts.dryRun = true;
+    else if (arg === "--json") opts.json = true;
   }
   return opts;
 }
@@ -211,52 +217,74 @@ async function scanProject(project, opts, publicDir) {
   };
 }
 
-async function main() {
-  const opts = parseArgs();
+async function runScan(opts) {
   const publicDir = path.join(process.cwd(), "public");
+  const now = new Date().toISOString();
 
-  console.log("Keuka Render Gallery — Scan");
-  console.log(`  Root:      ${opts.root}`);
-  console.log(`  Output:    ${opts.output}`);
-  console.log(`  Thumbs:    ${opts.thumbDir}`);
-  console.log(`  Incremental: ${opts.incremental}`);
-
-  let existing = { projects: [] };
-  if (opts.incremental && fs.existsSync(opts.output)) {
+  let existing = { projects: [], lastFullScan: now, lastIncrementalScan: now };
+  if (fs.existsSync(opts.output)) {
     existing = JSON.parse(fs.readFileSync(opts.output, "utf8"));
   }
 
-  const existingIds = new Set(existing.projects.map((p) => p.id));
+  const existingIds = new Set((existing.projects || []).map((p) => p.id));
   const allFolders = listProjectFolders(opts.root);
   const folders = opts.incremental
     ? allFolders.filter((f) => !existingIds.has(slugify(f.name)))
     : allFolders;
 
-  if (opts.incremental && folders.length < allFolders.length) {
-    console.log(
-      `  Incremental: skipping ${allFolders.length - folders.length} known project(s)`
-    );
+  const skippedCount = opts.incremental
+    ? allFolders.length - folders.length
+    : 0;
+
+  const resultBase = {
+    mode: opts.dryRun ? "dry-run" : opts.incremental ? "incremental" : "full",
+    projectsRoot: path.relative(process.cwd(), opts.root).replace(/\\/g, "/"),
+    scannedProjects: 0,
+    skippedProjects: skippedCount,
+    newProjects: folders.map((f) => f.name),
+    totalProjects: existing.projects?.length || 0,
+    totalImages: (existing.projects || []).reduce(
+      (n, p) => n + p.imageCount,
+      0
+    ),
+    lastFullScan: existing.lastFullScan || now,
+    lastIncrementalScan: existing.lastIncrementalScan,
+  };
+
+  if (opts.dryRun) {
+    return {
+      ...resultBase,
+      scannedProjects: folders.length,
+      totalProjects: opts.incremental
+        ? (existing.projects?.length || 0) + folders.length
+        : allFolders.length,
+    };
   }
 
   const scanned = [];
   for (const folder of folders) {
-    console.log(`Scanning: ${folder.name}`);
+    if (!opts.json) console.log(`Scanning: ${folder.name}`);
     const project = await scanProject(folder, opts, publicDir);
-    console.log(`  Found ${project.imageCount} image(s)`);
+    if (!opts.json) console.log(`  Found ${project.imageCount} image(s)`);
     scanned.push(project);
   }
 
   const mergedProjects = opts.incremental
-    ? [...existing.projects, ...scanned]
+    ? [...(existing.projects || []), ...scanned]
     : scanned;
 
   mergedProjects.sort((a, b) => a.name.localeCompare(b.name));
 
   const imageCount = mergedProjects.reduce((n, p) => n + p.imageCount, 0);
+  const lastFullScan = opts.incremental
+    ? existing.lastFullScan || now
+    : now;
+
   const db = {
     version: 1,
     projectsRoot: path.relative(process.cwd(), opts.root).replace(/\\/g, "/"),
-    lastFullScan: new Date().toISOString(),
+    lastFullScan,
+    lastIncrementalScan: now,
     projectCount: mergedProjects.length,
     imageCount,
     projects: mergedProjects,
@@ -265,12 +293,61 @@ async function main() {
   fs.mkdirSync(path.dirname(opts.output), { recursive: true });
   fs.writeFileSync(opts.output, JSON.stringify(db, null, 2), "utf8");
 
-  console.log("\nDone.");
-  console.log(`  Projects: ${db.projectCount}`);
-  console.log(`  Images:   ${db.imageCount}`);
+  return {
+    ...resultBase,
+    scannedProjects: scanned.length,
+    totalProjects: db.projectCount,
+    totalImages: db.imageCount,
+    lastFullScan: db.lastFullScan,
+    lastIncrementalScan: db.lastIncrementalScan,
+  };
 }
 
-main().catch((err) => {
-  console.error(err);
-  process.exit(1);
-});
+async function main() {
+  const opts = parseArgs();
+
+  if (!opts.json) {
+    console.log("Keuka Render Gallery — Scan");
+    console.log(`  Root:        ${opts.root}`);
+    console.log(`  Output:      ${opts.output}`);
+    console.log(`  Thumbs:      ${opts.thumbDir}`);
+    console.log(`  Incremental: ${opts.incremental}`);
+    console.log(`  Dry run:     ${opts.dryRun}`);
+  }
+
+  const result = await runScan(opts);
+
+  if (opts.json) {
+    console.log(JSON.stringify(result));
+    return;
+  }
+
+  if (opts.incremental && result.skippedProjects > 0) {
+    console.log(
+      `  Skipped ${result.skippedProjects} known project(s) (incremental)`
+    );
+  }
+
+  if (opts.dryRun) {
+    console.log("\nDry run — no files written.");
+    console.log(`  New projects to scan: ${result.newProjects.length}`);
+    result.newProjects.forEach((name) => console.log(`    - ${name}`));
+    return;
+  }
+
+  console.log("\nDone.");
+  console.log(`  Projects: ${result.totalProjects}`);
+  console.log(`  Images:   ${result.totalImages}`);
+  if (opts.incremental) {
+    console.log(`  New this run: ${result.scannedProjects}`);
+  }
+}
+
+module.exports = { runScan, parseArgs, slugify, listProjectFolders };
+
+if (require.main === module) {
+  main().catch((err) => {
+    console.error(err);
+    process.exit(1);
+  });
+}

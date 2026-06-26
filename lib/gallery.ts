@@ -30,6 +30,7 @@ export function getGalleryStats() {
     projectCount: db.projectCount,
     imageCount: db.imageCount,
     lastScan: db.lastFullScan,
+    lastIncrementalScan: db.lastIncrementalScan,
     projectsRoot: db.projectsRoot,
   };
 }

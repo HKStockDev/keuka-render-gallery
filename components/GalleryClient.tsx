@@ -6,6 +6,7 @@ import type { Project } from "@/lib/types";
 import SearchBar from "@/components/SearchBar";
 import ProjectGrid from "@/components/ProjectGrid";
 import ImageLightbox from "@/components/ImageLightbox";
+import AuthControls from "@/components/AuthControls";
 
 interface GalleryClientProps {
   projects: Project[];
@@ -87,9 +88,15 @@ export default function GalleryClient({ projects, stats }: GalleryClientProps) {
                 )}
               </p>
             </div>
-            <div className="hidden md:block text-right text-xs text-keuka-slate shrink-0">
-              <p>Last scan: {lastScanDate}</p>
-              <p className="mt-0.5">Source: {stats.projectsRoot}</p>
+            <div className="hidden md:flex items-center gap-4 text-right text-xs text-keuka-slate shrink-0">
+              <div>
+                <p>Last scan: {lastScanDate}</p>
+                <p className="mt-0.5">Source: {stats.projectsRoot}</p>
+              </div>
+              <AuthControls />
+            </div>
+            <div className="md:hidden">
+              <AuthControls />
             </div>
           </div>
         </div>
