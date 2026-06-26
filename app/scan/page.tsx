@@ -1,5 +1,5 @@
 import AdminPanel from "@/components/AdminPanel";
 
-export default function AdminPage() {
+export default function ScanPage() {
   return <AdminPanel />;
 }

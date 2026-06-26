@@ -37,7 +37,7 @@ npm run scan:preview
 npm run scan:incremental
 ```
 
-Or use the **scan page** at [/admin](http://localhost:3000/admin) when running locally — it shows new vs indexed projects and can trigger scans from the browser. No login required; all users have the same access.
+Or use the **scan page** at [/scan](http://localhost:3000/scan) when running locally — it shows new vs indexed projects and can trigger scans from the browser. No login required; all users have the same access.
 
 After scanning, restart the dev server (or commit + redeploy on Vercel):
 
@@ -84,13 +84,13 @@ git commit -m "Add gallery data"
 git push
 ```
 
-> **Note:** The scan script runs **locally** (or in CI), not on Vercel. Your team re-scans when new projects are added, then redeploys or commits updated JSON + thumbnails. The `/admin` page shows pending new projects and CLI commands on Vercel.
+> **Note:** The scan script runs **locally** (or in CI), not on Vercel. Your team re-scans when new projects are added, then redeploys or commits updated JSON + thumbnails. The `/scan` page shows pending new projects and CLI commands on Vercel.
 
 ## Project structure
 
 ```
 ├── app/
-│   ├── admin/              # Scan tools UI (open to all users)
+│   ├── scan/               # Scan tools UI (open to all users)
 │   └── api/scan/           # Scan preview + trigger (local only)
 ├── components/
 ├── data/gallery.json       # Scan index (loaded at build time)
@@ -112,7 +112,7 @@ git push
 | Web gallery | Next.js grid/search/lightbox |
 | Search by project | Client-side filter |
 | Windows Server | Node.js scan script + `ENABLE_SCAN_API=true` |
-| Incremental scan | `--incremental`, `/admin`, `npm run scan:incremental` |
+| Incremental scan | `--incremental`, `/scan`, `npm run scan:incremental` |
 | Well-commented code | Comments in scan script + this README |
 
 ## Production notes for Keuka
@@ -120,7 +120,7 @@ git push
 For the full internal deployment on Windows Server with live network paths:
 
 - Run `scan-projects.js` on a schedule (Task Scheduler) with `--incremental`
-- Set `ENABLE_SCAN_API=true` to allow scans from `/admin` on the local server
+- Set `ENABLE_SCAN_API=true` to allow scans from `/scan` on the local server
 - Or deploy the viewer to Vercel and run scans locally before each push
 
 ---

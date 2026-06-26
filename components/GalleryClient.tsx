@@ -115,7 +115,7 @@ export default function GalleryClient({ projects, stats }: GalleryClientProps) {
       <footer className="mt-20 py-8 border-t border-[var(--border)]/60">
         <div className="max-w-[1600px] mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[var(--muted)]">
           <p>Keuka Studios · Custom Architectural Metal Fabrication</p>
-          <Link href="/admin" className="hover:text-keuka-accent transition">
+          <Link href="/scan" className="hover:text-keuka-accent transition">
             Scan tools
           </Link>
         </div>
